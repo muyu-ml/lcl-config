@@ -1,0 +1,8 @@
+spring:
+    application:
+        name: lclconfig-demo
+
+lcl:
+    a: a00
+    b: b00
+    c: c00

@@ -10,3 +10,6 @@ Content-Type: application/json
     "lcl.c": "lcl200",
     "lcl.d": "lcl200"
 }
+
+### version
+GET http://localhost:9129/version?app=app1&env=dev&ns=public
