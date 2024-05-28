@@ -1,6 +1,7 @@
 package com.lcl.config.client.repository;
 
 import com.lcl.config.client.config.ConfigMeta;
+import org.springframework.context.ApplicationContext;
 
 import java.util.Map;
 
@@ -14,5 +15,9 @@ public interface LclRepository {
         return new LclRepositoryImpl(configMeta);
     }
 
+    void addListener(LclRepositoryChangeListener listener);
+
     Map<String, String> getConfig();
+
+
 }

@@ -1,3 +1,6 @@
+server:
+    port: 8880
+
 spring:
     application:
         name: lclconfig-demo
@@ -10,3 +13,4 @@ lcl:
 logging:
     level:
         root: info
+        cn.kimmking: debug

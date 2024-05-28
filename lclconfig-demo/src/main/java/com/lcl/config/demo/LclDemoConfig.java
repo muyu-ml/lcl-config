@@ -12,4 +12,5 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 public class LclDemoConfig {
 
     private String a;
+    private String b;
 }

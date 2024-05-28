@@ -6,10 +6,15 @@ POST http://localhost:9129/update?app=app1&env=dev&ns=public
 Content-Type: application/json
 
 {
-    "lcl.a": "dev200",
-    "lcl.c": "lcl200",
-    "lcl.d": "lcl200"
+    "lcl.a": "dev00000",
+    "lcl.c": "lcl400",
+    "lcl.d": "lcl500"
 }
 
 ### version
 GET http://localhost:9129/version?app=app1&env=dev&ns=public
+
+
+
+### demo 8888
+GET http://localhost:8880/demo1

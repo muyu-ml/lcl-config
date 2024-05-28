@@ -1,5 +1,9 @@
 package com.lcl.config.client.config;
 
+import com.lcl.config.client.repository.LclRepository;
+import org.springframework.cloud.context.environment.EnvironmentChangeEvent;
+import org.springframework.context.ApplicationContext;
+
 import java.util.Map;
 
 /**
@@ -10,9 +14,11 @@ import java.util.Map;
 public class LclConfigServiceImpl implements LclConfigService {
 
     Map<String, String> config;
+    ApplicationContext applicationContext;
 
-    public LclConfigServiceImpl(Map<String, String> config) {
+    public LclConfigServiceImpl(ApplicationContext applicationContext, Map<String, String> config) {
         this.config = config;
+        this.applicationContext = applicationContext;
     }
 
     @Override
@@ -23,5 +29,16 @@ public class LclConfigServiceImpl implements LclConfigService {
     @Override
     public String getProperty(String name) {
         return this.config.get(name);
+    }
+
+
+    @Override
+    public void onChange(ChangeEvent event) {
+        this.config = event.config();
+        // 发送 EnvironmentChangeEvent
+        if(!config.isEmpty()){
+            System.out.println("[LCLCONFIG] fire an EnvironmentChangeEvent with keys：" + config.keySet());
+            applicationContext.publishEvent(new EnvironmentChangeEvent(config.keySet()));
+        }
     }
 }

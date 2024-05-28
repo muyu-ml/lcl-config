@@ -1,8 +1,11 @@
 package com.lcl.config.client.config;
 
+import lombok.Data;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.EnvironmentAware;
 import org.springframework.core.Ordered;
 import org.springframework.core.PriorityOrdered;
@@ -17,13 +20,20 @@ import java.util.Map;
  * @Author conglongli
  * @date 2024/5/21 23:51
  */
-public class PropertySourcesProcessor implements BeanFactoryPostProcessor, EnvironmentAware, PriorityOrdered {
+public class PropertySourcesProcessor implements BeanFactoryPostProcessor, ApplicationContextAware, EnvironmentAware, PriorityOrdered {
 
     private final static String LCL_PROPERTY_SOURCE = "LclPropertySource";
     private final static String LCL_PROPERTY_SOURCES = "LclPropertySources";
 
     Environment environment;
 
+    ApplicationContext applicationContext;
+
+    /**
+     *
+     * @param beanFactory
+     * @throws BeansException
+     */
     @Override
     public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
         ConfigurableEnvironment ENV = (ConfigurableEnvironment) environment;
@@ -44,7 +54,7 @@ public class PropertySourcesProcessor implements BeanFactoryPostProcessor, Envir
 //        config.put("lcl.b", "b200");
 //        config.put("lcl.c", "c3000");
         // 从 lclconfig-server 获取配置
-        LclConfigService configService = LclConfigService.getDefault(configMeta);
+        LclConfigService configService = LclConfigService.getDefault(applicationContext, configMeta);
         // 创建一组配置项
         LclPropertySource propertySource = new LclPropertySource(LCL_PROPERTY_SOURCE, configService);
         // 组合的PropertySource
@@ -62,5 +72,10 @@ public class PropertySourcesProcessor implements BeanFactoryPostProcessor, Envir
     @Override
     public void setEnvironment(Environment environment) {
         this.environment = environment;
+    }
+
+    @Override
+    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+        this.applicationContext = applicationContext;
     }
 }
