@@ -29,6 +29,9 @@ public class LclconfigDemoApplication {
 	@Value("${lcl.b}")
 	private String b;
 
+	@Value("${lcl.a}.${lcl.b}")
+	private String a_b;
+
 	@Autowired
 	private LclDemoConfig lclDemoConfig;
 
@@ -53,6 +56,7 @@ public class LclconfigDemoApplication {
 	public String hello(){
 		return "lcl.a = " + a + "\n"
 				+ "lcl.b = " + b + "\n"
+				+ "lcl.a.lcl.b = " + a_b + "\n"
 				+ "LclDemoConfig.b = " + lclDemoConfig.getA() + "\n"
 				+ "LclDemoConfig.b = " + lclDemoConfig.getB();
 	}
