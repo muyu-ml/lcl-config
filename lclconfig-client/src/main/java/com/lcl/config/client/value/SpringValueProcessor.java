@@ -73,6 +73,7 @@ public class SpringValueProcessor implements BeanPostProcessor, BeanFactoryAware
      */
     @Override
     public void onApplicationEvent(EnvironmentChangeEvent event) {
+        log.info("[LCLCONFIG] >> update spring value for keys: {}", event.getKeys());
         event.getKeys().forEach(key -> {
             log.info("[LCLCONFIG] >> update spring value: {}", key);
             List<SpringValue> springValues = VALUE_HOLDER.get(key);
