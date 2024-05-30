@@ -18,3 +18,16 @@ GET http://localhost:9129/version?app=app1&env=dev&ns=public
 
 ### demo 8888
 GET http://localhost:8880/demo1
+
+
+
+### update lclrpc config
+POST http://localhost:9129/update?app=app1&env=dev&ns=public
+Content-Type: application/json
+
+{
+  "lclrpc.provider.metas.dc": "sz",
+  "lclrpc.provider.metas.gray": "false",
+  "lclrpc.provider.metas.unit": "SZ001",
+  "lclrpc.provider.metas.tc": 20
+}
