@@ -31,3 +31,12 @@ Content-Type: application/json
   "lclrpc.provider.metas.unit": "SZ001",
   "lclrpc.provider.metas.tc": 20
 }
+
+### get status 9129
+GET http://localhost:9129/status
+
+### get status 9130
+GET http://localhost:9130/status
+
+### get status 9131
+GET http://localhost:9131/status

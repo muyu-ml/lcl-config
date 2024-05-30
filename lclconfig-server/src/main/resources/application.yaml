@@ -13,10 +13,10 @@ spring:
     url: jdbc:mysql://127.0.0.1:3306/lclconfig?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai
     username: lcl
     password: 123456
-  sql:
-    init:
-      schema-locations: classpath:sql/db.sql
-      mode: always
+#  sql:
+#    init:
+#      schema-locations: classpath:sql/db.sql
+#      mode: always
   h2:
     console:
       enabled: true

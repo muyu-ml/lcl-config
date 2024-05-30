@@ -2,6 +2,7 @@ package com.lcl.config.server;
 
 import com.lcl.config.server.mapper.ConfigsMapper;
 import com.lcl.config.server.model.Configs;
+import com.lcl.config.server.model.DistribetedLocks;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,6 +19,8 @@ public class LclConfigController {
 
     @Autowired
     private ConfigsMapper configsMapper;
+    @Autowired
+    private DistribetedLocks distribetedLocks;
 
     Map<String, Long> VERSIONS = new HashMap<>();
 
@@ -50,5 +53,10 @@ public class LclConfigController {
     @GetMapping("/version")
     public Long version(String app, String env, String ns) {
         return VERSIONS.getOrDefault(app + "-" + env + "-" + ns, -1L);
+    }
+
+    @GetMapping("/status")
+    public boolean status() {
+        return distribetedLocks.getLocked().get();
     }
 }
